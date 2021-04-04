@@ -4,7 +4,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 const path = require('path');
-
+let jsonData = require('./db.json');
+console.log(jsonData);
 const PORT = process.env.PORT || 3001;
 
 // app.get('/api/animals', (req, res) => {
@@ -16,7 +17,7 @@ const PORT = process.env.PORT || 3001;
 // });
 
 app.get('/api/notes', (req, res) => {
-    res.json([]);
+    res.json(jsonData);
 })
 
 app.get('/notes', (req, res) => {
