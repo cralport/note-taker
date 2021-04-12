@@ -22,22 +22,22 @@ let allNotes;
 
 // ROUTER
 // The below points our server to set up routes
-app.get("/notes", function (req, res) {
+app.get("/notes", (req, res) => {
     res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
 
-app.get("/", function (req, res) {
+app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 
-app.get("/api/notes", function (req, res) {
+app.get("/api/notes", (req, res) => {
     readFileAsync(path.join(__dirname, "./db/db.json"), "utf8")
         .then(function (data) {
             return res.json(JSON.parse(data));
         });
 });
 
-app.post("/api/notes", function (req, res) {
+app.post("/api/notes", (req, res) => {
     var newNote = req.body;
     readFileAsync(path.join(__dirname, "./db/db.json"), "utf8")
         .then(function (data) {
@@ -57,7 +57,7 @@ app.post("/api/notes", function (req, res) {
     res.json(newNote);
 });
 
-app.delete("/api/notes/:id", function (req, res) {
+app.delete("/api/notes/:id", (req, res) => {
     var id = req.params.id;
     readFileAsync(path.join(__dirname, "./db/db.json"), "utf8")
         .then(function (data) {
@@ -74,5 +74,6 @@ app.delete("/api/notes/:id", function (req, res) {
 // LISTENER
 // The below code effectively "starts" our server
 app.listen(PORT, function () {
-    console.log(`Application Listening on ${PORT}`);
+    console.log(`App listening on ${PORT}`);
 });
+
