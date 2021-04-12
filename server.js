@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/notes", (req, res) => {
-    readFileAsync(path.join(__dirname, "./db/db.json"), "utf8")
+    readFileAsync(path.join(__dirname, "/db.json"), "utf8")
         .then(function (data) {
             return res.json(JSON.parse(data));
         });
@@ -39,7 +39,7 @@ app.get("/api/notes", (req, res) => {
 
 app.post("/api/notes", (req, res) => {
     var newNote = req.body;
-    readFileAsync(path.join(__dirname, "./db/db.json"), "utf8")
+    readFileAsync(path.join(__dirname, "/db.json"), "utf8")
         .then(function (data) {
             allNotes = JSON.parse(data);
             if (newNote.id || newNote.id === 0) {
@@ -49,7 +49,7 @@ app.post("/api/notes", (req, res) => {
             } else {
                 allNotes.push(newNote);
             }
-            writefileAsync(path.join(__dirname, "./db/db.json"), JSON.stringify(allNotes))
+            writefileAsync(path.join(__dirname, "/db.json"), JSON.stringify(allNotes))
                 .then(function () {
                     console.log("Wrote db.json");
                 })
@@ -59,11 +59,11 @@ app.post("/api/notes", (req, res) => {
 
 app.delete("/api/notes/:id", (req, res) => {
     var id = req.params.id;
-    readFileAsync(path.join(__dirname, "./db/db.json"), "utf8")
+    readFileAsync(path.join(__dirname, "/db.json"), "utf8")
         .then(function (data) {
             allNotes = JSON.parse(data);
             allNotes.splice(id, 1);
-            writefileAsync(path.join(__dirname, "./db/db.json"), JSON.stringify(allNotes))
+            writefileAsync(path.join(__dirname, "/db.json"), JSON.stringify(allNotes))
                 .then(function () {
                     console.log("Deleted db.json");
                 })
